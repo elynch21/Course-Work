@@ -1,0 +1,93 @@
+/******************************
+THIS PROGRAM RUNS STEPS NEEDED
+FOR COMPLETION OF SESSION 10
+PH490KR, SPRING 2018
+
+DESCRIPTIVE STATISTICS IN STATA
+
+KATHERINE REEVES
+ORIGINAL: FEBRUARY 22, 2016
+MODIFIED: FEBRUARY 8, 2018
+******************************/
+
+*1. OPEN DATASET, START LOG FILE
+use "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess10.dta", clear
+
+*2. SUMMARY STATISTICS FOR BMI, OVERALL AND BY SMOKING STATUS
+sum bmi, detail
+*a. stratified on smoking status
+by smoke01, sort : summarize bmi, detail
+
+*alternative coding, using tabstat command (using drop-down menus: Statistics-->Other tables-->Compact table of summary statistics)
+tabstat bmi, statistics( mean sd p25 p50 p75 ) by(smoke01)
+
+*alternatively, could use brute force approach:
+sum bmi if smoke01==0, d
+sum bmi if smoke01==1, d
+
+*b. use t test to determine if difference in BMI by smoking status
+*using drop-down menus: Statistics-->Summaries, tables, and tests --> Classical tests of hypothesis --> t test (mean comparison test)
+*then select "two sample using groups"
+ttest bmi, by(smoke01)
+
+*3. TABULATE BMI CATEGORIES, OVERALL AND BY SMOKING STATUS
+tabulate bmi_cat, miss
+*a. stratified on smoking status
+tabulate bmi_cat smoke01, miss
+
+*b. use chi square test to test for differences in bmi by smoking status
+tab bmi_cat smoke01, row col chi2
+
+*4. CALCULATE SUMMARY STATISTICS FOR WEIGHT
+sum wt_lbs, d
+
+*a. stratified by nsaid use
+by nsaid, sort: sum wt_lbs, d
+tabstat wt_lbs, statistics( mean sd p25 p50 p75 ) by(nsaid)
+
+*b. use t test to assess difference in weight by nsaid use
+ttest wt_lbs, by(nsaid)
+
+*5. TABULATE NSAID USE
+tab nsaid, miss
+
+*a. cross-tabulate with BMI category
+*b. perform chi square test
+tab nsaid bmi_cat, row col chi2
+
+*6. GROUP OHD INTO TERTILES, DETERMINE RANGE FOR EACH TERTILE AND LABEL
+xtile OHDT=OHD, nq(3)
+by OHDT, sort: sum OHD
+label define ohdf 1 "1_22-62.31" 2 "2_62.5-86.8" 3 "3_89.98-174.319"
+label values OHDT ohdf
+
+*7. CALCULATE MEAN BMI AMONG PPTS IN TERTILE 3 OF HEIGHT
+sum bmi if ht_tert==3
+
+*8. T TEST FOR SITTING BETWEEN SMOKERS AND NON SMOKERS, AMONG NORMAL WEIGHT
+ttest tot_sit if bmi_cat==2, by(smoke01)
+
+*9. RECGROUP ALC VARIABLE, CHI SQUARE TEST OF ASSOCIATION BETWEEN ALCOHOL AND TANNING	
+gen alc_cat=.
+replace alc_cat=0 if alc_numkr==0
+replace alc_cat=1 if alc_numkr==1 | alc_numkr==2
+replace alc_cat=2 if alc_numkr==3 | alc_numkr==4
+replace alc_cat=3 if alc_numkr>=5 & alc_numkr!=.
+
+*alternative approach
+clonevar alc_cat2=alc_numkr
+recode alc_cat2 (0=0) (1/2=1) (3/4=2) (5/max=3)
+
+label variable alc_cat "alc_cat: number of alcoholic drinks on days drank"
+label variable alc_cat2 "alc_cat2: number of alcoholic drinks on days drank"
+
+label define alcf 0 "0_0 drinks" 1 "1_1-2 drinks" 2 "2_3-4 drinks" 3 "3_5+ drinks"
+label values alc_cat alc_cat2 alcf
+
+*check your work
+tab alc_numkr alc_cat 
+tab alc_numkr alc_cat2 
+tab alc_cat alc_cat2
+
+
+tab alc_cat tan_freqkr, row col chi2
