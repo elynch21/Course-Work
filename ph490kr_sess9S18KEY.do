@@ -1,0 +1,195 @@
+/*******************************
+THIS PROGRAM PRODUCES KEY
+TO PH490KR SESSION 9 ACTIVITY
+
+KATHERINE REEVES
+ORIGINAL: FEB 29, 2016
+MODIFIED: FEB 6, 2018
+********************************/
+
+*START A LOG FILE
+log using "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Sessions\Session9\sess9_020618.smcl"
+
+use "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess9.dta"
+
+*1. LABEL EACH VARIABLE AND VALUES
+*easy to use variables manager and then paste code below
+label variable id "id: study id"
+label variable curmed "curmed: medications for PMS"
+label variable nra_sit1 "nra_sit1: time/wk sitting computer, class, work, driving"
+label variable nra_sit2 "nra_sit2: time/wk sitting reading, talking, eating"
+label variable nra_sit3 "nra_sit3: time/wk sitting TV"
+label variable alc_ev "alc_ev: ever 12+ alcoholic drinks"
+label variable alc_num "alc_num: number alcoholic drinks on days drank"
+label variable tan "tan: used tanning in past 6 months"
+label variable tan_freq "tan_freq: how often tanned"
+label variable wst_in "wst_in: waist circumference, inches"
+label variable OHD "OHD: serum 25 hydroxy vitamin D"
+
+label define sitf 1 "1_0 hrs" 2 "2_1 hr" 3 "3_2-5 hrs" 4 "4_6-10 hrs" 5 "5_11-20 hrs" 6 "6_21-40 hrs" 7 "7_41-60 hrs" 8 "8_61-90 hrs" 9 "9_90+ hrs"
+label define ynf 0 "0_no" 1 "1_yes" 99 "99_missing"
+label define alc_numf 99 "99_missing"
+label define tanf 1 "1_>1 per week" 2 "2_weekly" 3 "3_biweekly" 4 "4_monthky" 5 "5_bimonthly" 6 "6_only once or twice" 9 "9_missing"
+label define biolf 99 "999_missing"
+
+label values nra_sit1 sitf
+label values nra_sit2 sitf
+label values nra_sit3 sitf
+label values alc_ev ynf
+label values alc_num alc_numf
+label values tan ynf
+label values tan_freq tanf
+label values wst_in biolf
+label values OHD biolf
+
+*2. CHECK ALC_NUM FOR ERRORS AND FIX, CALCULATE MEAN
+sum alc_num, d
+tab alc_num, miss
+*have 82 observations marked 99=missing plus 4 more observations coded .=missing
+*need to check these against the alc_ev variable to be see if they were skipped or missing
+tab alc_num alc_ev, miss
+*there are 19 who answers no to alc_ev and were appropriately skipped from alc_num--> can infer that they had 0 drinks
+*there are 4 who answered no to alc_ev and were missing on alc_num-->can infer that they had 0 drinks
+*there are 62 who were missing on both questions, and should be missing on alc_num-->recode to .
+*there is 1 who answered yes on alc_ev and missing on alc_num, should be missing on alc_num-->recode to .
+*1 said no to alc_ev and then 1 to alc_num--> set to 0 to be consistent with applying skip pattern
+*there is 1 who was missing on alc_ev and then said 8 for alc_num-->set to missing to be consistent
+*also, one person said "61 drinks," which is probably inaccurate (she would be dead!)-->recode to .
+
+clonevar alc_numkr=alc_num
+replace alc_numkr=0 if alc_num==99 & alc_ev==0
+replace alc_numkr=0 if alc_num==. & alc_ev==0
+replace alc_numkr=. if alc_ev==99
+replace alc_numkr=. if alc_num==99 & alc_ev==99
+replace alc_numkr=. if alc_num==99 & alc_ev==1
+replace alc_numkr=0 if alc_num==1 & alc_ev==0
+replace alc_numkr=. if alc_numkr==61
+
+
+tab alc_numkr, miss
+
+*3. RECODE TAN_FREQ TO GROUP BIMONTHLY OR MORE INTO A SINGLE CATEGORY
+tab tan_freq tan, miss
+
+clonevar tan_freqkr=tan_freq
+replace tan_freqkr=5 if tan_freq<=5
+replace tan_freqkr=. if tan_freq==9 & tan!=0
+replace tan_freqkr=7 if tan_freq==9 & tan==0 
+
+*fix the value labels
+label define tanf 5 "5_bimonthly or more" 7 "7_never tans",modify
+
+*check our work
+tab tan_freq tan_freqkr, miss
+list id tan_freq tan_freqkr in 1/50
+
+*4. CHECK WST_IN AND FIX ERRORS. GROUP INTO QUARTILES
+sum wst_in, d /*no missing values, everything looks good*/
+*quartile cutpoints: 28, 30, 33
+xtile wstquart=wst_in, nq(4)
+label variable wstquart "wstquart: waist circumference in quartiles"
+bysort wstquart: sum wst_in
+label define wstqf 1 "1_Q1:23-28 in" 2 "2_Q2:28.5-30 in" 3 "3_Q3:30.3-33 in" 4 "4_Q4:33.5-45 in"
+label values wstquart wstqf
+
+*5. CREATE NEW VARIABLE INDICATING IF USED NSAID
+tab curmed, miss
+*use "encode" to take the text (string) variable and transform it into a labeled numeric variable
+encode curmed, generate(curmed2)
+*use labelbook to see the numbers associated with each label.
+labelbook curmed2
+*create a new variable, and pick out codes assigned to ibuprofen, aspirin, advil, naproxen, motrin, or aleve
+*codes 1-7, 9, 11, 12, 13, 16-21, 23-26, 32, 34, 35, 36, 43, 48, 49, 51, 52-54, 56
+gen nsaid=.
+replace nsaid=1 if curmed2>=1 & curmed2<=7
+replace nsaid=1 if curmed2==9|curmed2==1|curmed2==12|curmed2==13
+replace nsaid=1 if curmed2>=16 & curmed2<=21
+replace nsaid=1 if curmed2>=23 & curmed2<=26
+replace nsaid=1 if curmed2==32|curmed2==34|curmed2==35|curmed2==36|curmed2==43|curmed2==48|curmed2==49
+replace nsaid=1 if curmed2>=51 & curmed2<=54
+replace nsaid=1 if curmed2==56
+*anyone not specifically stating an nsaid used will be coded as no
+replace nsaid=0 if nsaid==.
+
+label variable nsaid "nsaid: uses NSAID for PMS symptoms"
+label values nsaid ynf
+
+*check our work
+list id curmed nsaid in 1/50
+
+*6. CHECK OHD AND FIX ERRORS. GROUP INTO TERTILES
+sum OHD, d
+/*note: have a lot of missing values; because "tab" can give lenghty output 
+with continuous variables, let's use a new command "count" to see how many ppts have 999*/
+count if OHD==999
+*now set 999 to missing so we can calculate the appropriate mean
+clonevar OHDkr=OHD
+replace OHDkr=. if OHD==999
+*check our work
+count if OHDkr==999 /*0, good!*/
+count if OHDkr==. /*108, good!*/
+*now calculate mean
+sum OHDkr
+*group into tertiles
+xtile OHDtert=OHDkr, nq(3)
+label variable OHDtert "OHDtert: Vitamin D tertile"
+label define tertf 1 "1_Tertile 1" 2 "2_Tertile 2" 3 "3_Tertile 3"
+label values OHDtert tertf
+
+*7. BONUS: CREATE A NEW VARIABLE CALCULATING TOTAL HRS/WK SITTING
+*first, let's look at the three nra_sit# variables
+tab1 nra_sit1 nra_sit2 nra_sit3, miss
+/*note that theses are coded as ranges, not exact hrs/wk;
+we will need to use the midpoint of each range when adding 
+across activities. Easiest approach is to recode each of these
+variables first.
+Also note that one ppt is missing a value for nra_sit1*/
+
+gen nra_sit1kr=nra_sit1
+gen nra_sit2kr=nra_sit2
+gen nra_sit3kr=nra_sit3
+
+replace nra_sit1kr=0 if nra_sit1==1 /*0 hrs*/
+replace nra_sit1kr=1 if nra_sit1==2 /*1 hr*/
+replace nra_sit1kr=3.5 if nra_sit1==3 /*midpoint of 2-5hrs*/
+replace nra_sit1kr=8 if nra_sit1==4 /*midpoint of 6-10hrs*/
+replace nra_sit1kr=15.5 if nra_sit1==5 /*midpoint of 11-20hrs*/
+replace nra_sit1kr=30.5 if nra_sit1==6 /*midpoint of 21-40hrs*/
+replace nra_sit1kr=49.5 if nra_sit1==7 /*midpoint of 41-60hrs*/
+replace nra_sit1kr=75.5 if nra_sit1==8 /*midpoint of 61-90hrs*/
+replace nra_sit1kr=90 if nra_sit1==9 /*just set to max since no midpoint for 90+*/
+
+*now, copy and paste above and change variable names for nra_sit2 and nra_sit3
+replace nra_sit2kr=0 if nra_sit2==1 /*0 hrs*/
+replace nra_sit2kr=1 if nra_sit2==2 /*1 hr*/
+replace nra_sit2kr=3.5 if nra_sit2==3 /*midpoint of 2-5hrs*/
+replace nra_sit2kr=8 if nra_sit2==4 /*midpoint of 6-10hrs*/
+replace nra_sit2kr=15.5 if nra_sit2==5 /*midpoint of 11-20hrs*/
+replace nra_sit2kr=30.5 if nra_sit2==6 /*midpoint of 21-40hrs*/
+replace nra_sit2kr=49.5 if nra_sit2==7 /*midpoint of 41-60hrs*/
+replace nra_sit2kr=75.5 if nra_sit2==8 /*midpoint of 61-90hrs*/
+replace nra_sit2kr=90 if nra_sit2==9 /*just set to max since no midpoint for 90+*/
+
+replace nra_sit3kr=0 if nra_sit3==1 /*0 hrs*/
+replace nra_sit3kr=1 if nra_sit3==2 /*1 hr*/
+replace nra_sit3kr=3.5 if nra_sit3==3 /*midpoint of 2-5hrs*/
+replace nra_sit3kr=8 if nra_sit3==4 /*midpoint of 6-10hrs*/
+replace nra_sit3kr=15.5 if nra_sit3==5 /*midpoint of 11-20hrs*/
+replace nra_sit3kr=30.5 if nra_sit3==6 /*midpoint of 21-40hrs*/
+replace nra_sit3kr=49.5 if nra_sit3==7 /*midpoint of 41-60hrs*/
+replace nra_sit3kr=75.5 if nra_sit3==8 /*midpoint of 61-90hrs*/
+replace nra_sit3kr=90 if nra_sit3==9 /*just set to max since no midpoint for 90+*/
+
+*create new variable and initiatlize to missing, then add up the three variables
+gen tot_sit=.
+replace tot_sit=nra_sit1kr+nra_sit2kr+nra_sit3kr
+*notice that there is one mising value, let's look at this
+list nra_sit1 nra_sit2 nra_sit3 if tot_sit==.
+*this shouldn't be missing! this happened because stata won't do arithmetic with a missing value
+*many approaches to fixing this, let's just add nra_sit2 and nra_sit3 for this ppt
+replace tot_sit=nra_sit2kr + nra_sit3kr if nra_sit1==.
+
+*now let's check our work
+list id nra_sit1kr nra_sit2kr nra_sit3kr tot_sit in 100/150
+
+

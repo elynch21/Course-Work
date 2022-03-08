@@ -1,0 +1,16 @@
+/* This program runs analyses for session 4, PH490KR, Spring 2018
+uses umass vitamin d data set
+Emily Lynch
+Original: 2/1/18
+Modified: 2/1/18
+*/
+*1 open vit d dataset
+use "C:\Users\emilylynch\Downloads\VitDS18.dta" 
+ 
+*2 describe the contents of the dataset
+describe
+codebook
+
+*3 calculate summary statistics 
+summarize age, detail
+tabulate ev_smk

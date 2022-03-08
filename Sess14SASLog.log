@@ -1,0 +1,132 @@
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA.
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M2)
+      Licensed to UNIVERSITY OF MASSACHUSETTS  - SFA T&R, Site 70084291.
+NOTE: This session is executing on the X64_8PRO  platform.
+
+
+
+NOTE: Updated analytical products:
+
+      SAS/STAT 13.2
+      SAS/ETS 13.2
+      SAS/OR 13.2
+      SAS/IML 13.2
+      SAS/QC 13.2
+
+NOTE: Additional host information:
+
+ X64_8PRO WIN 6.2.9200  Workstation
+
+NOTE: SAS initialization used:
+      real time           0.63 seconds
+      cpu time            0.56 seconds
+
+NOTE: Unable to open SASUSER.REGSTRY. WORK.REGSTRY will be opened instead.
+NOTE: All registry changes will be lost at the end of the session.
+WARNING: Unable to copy SASUSER registry to WORK registry. Because of this,
+WARNING: you will not see registry customizations during this session.
+NOTE: Unable to open SASUSER.PROFILE. WORK.PROFILE will be opened instead.
+NOTE: All profile changes will be lost at the end of the session.
+NOTE: This SAS session is using a registry in WORK.  All changes will be lost at the end of this
+NOTE: session.
+NOTE: This SAS session is using a registry in WORK.  All changes will be lost at the end of this
+      session.
+NOTE: This SAS session is using a registry in WORK.  All changes will be lost at the end of this
+      session.
+NOTE: This SAS session is using a registry in WORK.  All changes will be lost at the end of this
+      session.
+1    libname ph490kr "C:\Users\emilylynch\Downloads\VitDsess14.sas7bdat";
+ERROR: Library PH490KR is not in a valid format for access method RANDOM.
+ERROR: Error in the LIBNAME statement.
+2    libname ph490kr "C:\Users\emilylynch\Downloads";
+NOTE: Libref PH490KR refers to the same physical library as TMP1.
+NOTE: Libref PH490KR was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: C:\Users\emilylynch\Downloads
+3    /* this program completes activities
+4    for session 14, spring 2018
+5
+6    Emily Lynch
+7    March 20, 2018*/
+8
+9    libname ph490kr "C:\Users\emilylynch\Downloads";
+NOTE: Libref PH490KR refers to the same physical library as TMP1.
+NOTE: Libref PH490KR was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: C:\Users\emilylynch\Downloads
+10
+11   data sess14;
+12   set ph490kr.vitsess14;
+ERROR: File PH490KR.VITSESS14.DATA does not exist.
+13   run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+WARNING: The data set WORK.SESS14 may be incomplete.  When this step was stopped there were 0
+         observations and 0 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.22 seconds
+      cpu time            0.03 seconds
+
+
+14   /* this program completes activities
+15   for session 14, spring 2018
+16
+17   Emily Lynch
+18   March 20, 2018*/
+19
+20   libname ph490kr "C:\Users\emilylynch\Downloads";
+NOTE: Libref PH490KR refers to the same physical library as TMP1.
+NOTE: Libref PH490KR was successfully assigned as follows:
+      Engine:        V9
+      Physical Name: C:\Users\emilylynch\Downloads
+21
+22   data sess14;
+23   set ph490kr.vitdsess14;
+24   run;
+
+NOTE: There were 288 observations read from the data set PH490KR.VITDSESS14.
+NOTE: The data set WORK.SESS14 has 288 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.03 seconds
+
+
+25   proc contents data=sess14;
+NOTE: Writing HTML Body file: sashtml.htm
+26   run;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.85 seconds
+      cpu time            0.04 seconds
+
+
+27   proc print data=sess14;
+28   var ev_smk cur_smk;
+29   run;
+
+NOTE: There were 288 observations read from the data set WORK.SESS14.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.16 seconds
+      cpu time            0.04 seconds
+
+
+30   proc print data=sess14;
+31   var ev_smk cur_smk;
+32   run;
+
+NOTE: There were 288 observations read from the data set WORK.SESS14.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.04 seconds
+
+
+33   proc print data=sess14 (obs=100);
+34   var ev_smk cur_smk;
+35   run;
+
+NOTE: There were 100 observations read from the data set WORK.SESS14.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+
+

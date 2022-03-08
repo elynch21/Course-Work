@@ -1,0 +1,54 @@
+/*****************************
+This program run the activities
+for Homework 4, Spring 2018
+
+Emily Lynch
+Original: April 1, 2018
+Modified: April 2, 2018
+*****************************/
+
+*1. Assign libname to folder where dataset is stored;
+libname ph490kr "C:\Users\emilylynch\Desktop\ph490kr";
+
+*read in dataset;
+data HW4;
+set ph490kr.lowbwt;
+run;
+
+*2. Label each variable and its values;
+proc format library=ph490kr;
+value cntrl_case 0= "0_cntrlNorm" 1= "1_caseLow";
+value raceL 0= "0_white" 1= "1_black" 2= "2_other";
+value smkstat 0= "0_nonsmk" 1= "1_smk";
+run;
+
+options fmtsearch=(ph490kr);
+
+data HW4;
+set HW4;
+
+format low cntrl_case. race raceL. smoke smkstat.;
+
+label id= "id: participant ID num";
+label low= "low: case/cntrl status for low birthwght baby";
+label age= "age: moms age, yrs";
+label race= "race: moms race";
+label smoke= "smoke: moms smoke status";
+label ftv= "ftv: num of Dr visits first tri";
+label bwt= "bwt: baby birthwght, grams";
+run;
+
+proc contents data=HW4;
+run;
+
+*3. Create new variable grouping age into: <20, 20-24, 25-29, 30-34, >=35. Label new var and its values. Check work.;
+
+
+if (age<20) then agecat=1;
+else if (age>=20) & (age<24) then agecat=2;
+else if (age>=25) & (age<29) then agecat=3;
+else if (age>=30) & (age<34) then agecat=4;
+else if (age>=35) then agecat=5;
+else if age=. then agecat=.;
+
+value
