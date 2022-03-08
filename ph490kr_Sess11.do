@@ -1,10 +1,10 @@
 /*************************************
-This program provides key for session
+This program runs session
 11, ph490kr spring 2018
 
 Calculating OR/RR in Stata
 
-katherine reeves
+Emily Lynch
 february 8, 2018
 *************************************/
 
