@@ -1,17 +1,17 @@
 - Undergraduate Course Work from Pubic Health 490KR Epidemiologic Data Management & Analysis, Taught by Professor Katherine W. Reeves, PhD, MPH
-
 - Course taken Spring Semester 2018
+
 - Students will develop fundamental skills in epidemiologic research, including data management, data analysis, and interpretation of results 
 - A major emphasis of the course will be to provide students with practical experience in analyzing research datasets using both Stata and SAS
-- 
-- Course Objectives: At the end of this course, students will be able to:
-- 1) Plan, organize, and document data management and analysis tasks to obtain reproducible results 
-- 2) Appropriately clean and label epidemiologic datasets using Stata and SAS
-- 3) Calculate basic descriptive statistics using Stata and SAS
-- 4) Calculate relative risks and odds ratios using Stata and SAS
 
-- CEPH Outcome Competencies: This course educates students in the following Council for Education in Public Health (CEPH) outcome competencies:
-- Analyze data using appropriate epidemiologic and biostatistical techniques; Use computer software for data processing and statistical analyses
+    - Course Objectives: At the end of this course, students will be able to:
+    - 1) Plan, organize, and document data management and analysis tasks to obtain reproducible results 
+    - 2) Appropriately clean and label epidemiologic datasets using Stata and SAS
+    - 3) Calculate basic descriptive statistics using Stata and SAS
+    - 4) Calculate relative risks and odds ratios using Stata and SAS
+
+    - CEPH Outcome Competencies: This course educates students in the following Council for Education in Public Health (CEPH) outcome competencies:
+    - Analyze data using appropriate epidemiologic and biostatistical techniques; Use computer software for data processing and statistical analyses
 
 - Required Texts
 - Acock, AC. A Gentle Introduction to Stata. (4 ed). StataCorp LP, 2014.
