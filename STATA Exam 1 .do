@@ -18,7 +18,6 @@ label variable stroke "stroke: Incident of stroke"
 label define StrokehistNY 0 "No" 1 "Yes"
 label values stroke StrokehistNY
 
-GOOD, BUT BEST PRACTICE IS TO INCLUDE THE VALUE WITHIN ITS LABEL (-1)
 
 
 *Check variable bmi for errors/problems*
@@ -32,7 +31,7 @@ sum bmi2, d
 *now min bmi=14.43 and max bmi=56.8, which both seem extreme*
 tab bmi2
 *however, looking over all values it does not look like these numbers are errors/typos because there are many other values leading to them in the mid teens/mid fiftys*
-GOOD, BUT BEST CHECK OF YOU WORK COMPARES NEW TO ORIGINAL VARIABLES (-1)
+
 
 *create new variable cardio*
 gen cardio=.
@@ -45,7 +44,6 @@ label values cardio cardioever
 *check*
 tab cardio, missing
 *all 11,627 observations are accounted for*
-GOOD, BUT BEST CHECK OF YOU WORK COMPARES NEW TO ORIGINAL VARIABLES (-1)
 
 
 *calculate descriptive stats for bmi and cardio, interpret results*
@@ -68,9 +66,3 @@ NOTE THAT THE CIs DO NOT OVERLAP, WHICH IS EVIDENCE OF STATISTICAL SIGNIFICANCE 
 
 tabodds cardio bmi2
 *gives you p=0.0004 which is less then 0.05 therefore statistically significant*
-NOT SURE WHAT THIS IS, ABOVE T TEST WAS CORRECT
-
-*after reading number 6 I realized I somewhat combined 5&6*
-
-
-GRADE ON PART 2: 57/60
