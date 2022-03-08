@@ -15,8 +15,6 @@ data HW5;
 set ph490kr.lowbwt;
 run;
 
-*/I was a little confused about how to go about opening the modified dataset*;
-*/I relabeled them again instead*;
 
 *Label each variable and its values;
 proc format library=ph490kr;
@@ -61,7 +59,7 @@ class race;
 var low;
 run;
 
-*3.joint distribution of having a low birthweight baby and mother’s race;
+*3.joint distribution of having a low birthweight baby and mother√ïs race;
 proc freq data=HW5;
 table low*race/chisq; 
 run;
