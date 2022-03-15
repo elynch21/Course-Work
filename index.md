@@ -5,7 +5,7 @@ Course taken Spring Semester 2018
 
 Developed fundamental skills in epidemiologic research, including data management, data analysis, and interpretation of results. A major emphasis of the course was to provide students with practical experience in analyzing research datasets using both Stata and SAS.
 
-Course Objectives: At the end of this course, students will be able to:
+# Course Objectives: At the end of this course, students will be able to:
 
 - Plan, organize, and document data management and analysis tasks to obtain reproducible results
 
@@ -14,23 +14,26 @@ Course Objectives: At the end of this course, students will be able to:
  - Calculate basic descriptive statistics using Stata and SAS
 
  - Calculate relative risks and odds ratios using Stata and SAS
-CEPH Outcome Competencies: This course educates students in the following Council for Education in Public Health (CEPH) outcome competencies:
+ 
+# CEPH Outcome Competencies: This course educates students in the following Council for Education in Public Health (CEPH) outcome competencies:
 Analyze data using appropriate epidemiologic and biostatistical techniques; Use computer software for data processing and statistical analyses
 
-Required Texts
+# Required Texts
 
 Acock, AC. A Gentle Introduction to Stata. (4 ed). StataCorp LP, 2014.
 
 Delwiche, L. The Little SAS Book: A Primer. (5th ed). SAS Institute Inc. 2012.
 
-COURSE SCHEDULE
+
+# COURSE SCHEDULE
+
 
 Introduction to Epidemiologic Data Management & Analysis 
 - Data Management 1: Survey Design
 - Data Management 2: Creating and Documenting Datasets
 Module 1: Programming in Stata
 
-Introduction to Stata; Organizing and Documenting Your Work
+Introduction to Stata: Organizing and Documenting Your Work
   - HW 1 Assigned
 Stata Data Cleaning 1: Labeling Variables and Their Values 
 Stata Data Cleaning 2: Identifying and Addressing Errors
@@ -44,7 +47,8 @@ Stata Data Analysis 2: Odds Ratios & Relative Risk
   - Exam 1
 Module 2: Programming in SAS
 
-Introduction to SAS
+Introduction to SAS:
+
 SAS Data Cleaning 1: Labeling Variables and Their Values
   - HW 4 Assigned
 SAS Data Cleaning 2: Identifying and Addressing Errors
