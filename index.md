@@ -32,32 +32,32 @@ Delwiche, L. The Little SAS Book: A Primer. (5th ed). SAS Institute Inc. 2012.
 - Introduction to Epidemiologic Data Management & Analysis 
   - Data Management 1: Survey Design
   - Data Management 2: Creating and Documenting Datasets
- - Module 1: Programming in Stata
+
+ - Learning Module 1: Programming in Stata
 
 - Introduction to Stata: Organizing and Documenting Your Work
    - HW 1 Assigned
- - Stata Data Cleaning 1: Labeling Variables and Their Values 
- - Stata Data Cleaning 2: Identifying and Addressing Errors
- - Stata Data Cleaning 3: Creating New Variables
+  - Stata Data Cleaning 1: Labeling Variables and Their Values 
+  - Stata Data Cleaning 2: Identifying and Addressing Errors
+  - Stata Data Cleaning 3: Creating New Variables
    - HW 2 Assigned
- - Stata Data Cleaning 4: Creating New Variables (continued) 
- - Stata Work Session 1
- - Stata Data Analysis 1: Descriptive Statistics
+  - Stata Data Cleaning 4: Creating New Variables (continued) 
+  - Stata Work Session 1
+  - Stata Data Analysis 1: Descriptive Statistics
    - HW 3 Assigned
- - Stata Data Analysis 2: Odds Ratios & Relative Risk
+  - Stata Data Analysis 2: Odds Ratios & Relative Risk
    - Exam 1
- - Module 2: Programming in SAS
-
+ - Learning Module 2: Programming in SAS
+ 
 - Introduction to SAS:
-
  - SAS Data Cleaning 1: Labeling Variables and Their Values
-   - HW 4 Assigned
+  - HW 4 Assigned
  - SAS Data Cleaning 2: Identifying and Addressing Errors
  - SAS Data Cleaning 3: Creating New Variables
  - SAS Work Session 1
-   - HW 5 Assigned
+  - HW 5 Assigned
  - SAS Data Analysis 1: Descriptive Statistics
  - SAS Data Analysis 2: Odds Ratios & Relative Risk
  - SAS Work Session 2
-   - Exam 2
+  - Exam 2
 - Group Project Presentations
