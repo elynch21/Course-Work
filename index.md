@@ -15,17 +15,17 @@ Developed fundamental skills in epidemiologic research, including data managemen
 
  - Calculate relative risks and odds ratios using Stata and SAS
  
-# CEPH Outcome Competencies: This course educates students in the following Council for Education in Public Health (CEPH) outcome competencies:
+### CEPH Outcome Competencies: This course educates students in the following Council for Education in Public Health (CEPH) outcome competencies:
 Analyze data using appropriate epidemiologic and biostatistical techniques; Use computer software for data processing and statistical analyses
 
-# Required Texts
+## Required Texts
 
 Acock, AC. A Gentle Introduction to Stata. (4 ed). StataCorp LP, 2014.
 
 Delwiche, L. The Little SAS Book: A Primer. (5th ed). SAS Institute Inc. 2012.
 
 
-# COURSE SCHEDULE
+## COURSE SCHEDULE
 
 
 Introduction to Epidemiologic Data Management & Analysis 
