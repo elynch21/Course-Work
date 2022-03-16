@@ -1,0 +1,70 @@
+/*********************************
+THIS PROGRAM RUNS CODE TO COMPLETE
+SESSION 14, PH490KR, SPRING 2018
+
+Emily Lynch
+ORIGINAL: MARCH 19, 2018
+MODIFIED: MARCH 21, 2018
+**********************************/
+
+*3.use a libname statement to tell SAS where your dataset is stored;
+
+libname ph490kr "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets";
+
+*4.basic data step to read in the dataset;
+data sess14; /*this will put the dataset into "work", if I want to save it I can write data ph490kr.sess16*/
+set ph490kr.VitDSess14;
+run;
+
+*5. use proc contents to view info about the dataset;
+proc contents data=sess14;
+run;
+
+*6. use proc print;
+*a. print ev_smk and cur_smk;
+proc print data=sess14;
+var ev_smk cur_smk;
+run;
+
+*b. as above, but only first 100 observations;
+proc print data=sess14 (obs=100);
+var ev_smk cur_smk;
+run;
+
+*c. brand for current smokers;
+proc print data=sess14;
+where cur_smk=1;
+var brand;
+run;
+
+*d. cig_day for those starting smoking after age 15;
+proc print data=sess14;
+where age_cig>15 & age_cig^=99;
+var cig_day;
+run;
+
+*7. sort dataset by cur_smk;
+proc sort data=sess14;
+by cur_smk;
+run;
+
+*8. print cig_day by current smoking status;
+*note: you need to have the data sorted before you can use "by";
+proc print data=sess14;
+by cur_smk;
+var cig_day;
+run;
+
+*9. save a copy of the dataset including only current smokers;
+
+*code below will create a "temporary" dataset stored in the library "work";
+data cursmk;
+set sess14;
+where cur_smk=1;
+run;
+
+*to make a permament dataset, we just specify the name of a permanent SAS library;
+data ph490kr.cursmk;
+set sess14;
+where cur_smk=1;
+Run;
