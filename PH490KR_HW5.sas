@@ -14,8 +14,6 @@ libname ph490kr "C:\Users\emilylynch\Desktop\ph490kr";
 data HW5;
 set ph490kr.lowbwt;
 run;
-*/I was a little confused about how to go about opening the modified dataset*;
-*/I relabeled them again instead*;
 
 proc format library=ph490kr;
 value cntrl_case 0= "0_cntrlNorm" 1= "1_caseLow";
@@ -52,20 +50,19 @@ proc ttest data=HW5;
 var low;
 run;
 */p<.0001 and the CI does not include 1 so I would say this is stat significant*;
-/*CODE IS CORRECT, BUT FOR "INTERPRETATION" PLEASE WRITE A STATEMENT NOTING THE MEANS, SEE KEY*/
+
 *2C. Test if theres a stat significant diff in mean birthweight btwn whites and blacks. Interpret your results;
 proc univariate data=HW5;
 class race;
 var low;
 run;
-*p<.0001 so I would say this is stat significant*; /*GOOD, BUT MORE DETAIL, MEANING WHAT?-->THERE IS A STATISTICALLY SIGNIFICANT DIFFERENCE IN MEAN BIRTHWEIGHT BETWEEN THE TWO GROUPS*/
+*p<.0001 so I would say this is stat significant*; 
 
 *3.joint distribution of having a low birthweight baby and mothers race;
 proc freq data=HW5;
 table low*race/chisq;
 run;
 *p=0.0588 so it is not statistically signficant*;
-/*NEED TO READ THE P VALUE FROM THE TOP ROW THAT SAYS "CHI-SQUARE", NOT THE MANTEL-HAENZEL CHI SQUARE, I KNOW IT IS CONFUSING!*/
 *Recode the variable for number of first trimester visits to place women with 2 or more visits into a single category. Label this variables and its values as appropriate. Check your work;
 
 data HW5;
@@ -114,5 +111,5 @@ run;
 proc freq data=HW5 order=data;
 where ftvcat ne 2;
 run;
-/*NEED TO PROVIDE INTERPRETATION, SEE KEY*/
+
 */T3 v T1 31.97, T2 v T1 68.03*;
