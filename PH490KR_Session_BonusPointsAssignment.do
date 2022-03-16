@@ -1,6 +1,6 @@
 /******************************
 This program runs steps for the 
-extra credit assignment 
+Bonus Points assignment 
 
 Emily Lynch
 Due: March 23, 2018
@@ -8,7 +8,7 @@ Due: March 23, 2018
 
 
 *Open dataset
-use "/Users/emily_lynch21/Downloads/ExtraCredit.dta"
+use "/Users/emily_lynch21/Downloads/Bonus.dta"
 
 
 *1. Label each variable and its values.
