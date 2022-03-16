@@ -2,15 +2,14 @@
 THIS PROGRAM PRODUCES KEY
 TO PH490KR SESSION 9 ACTIVITY
 
-KATHERINE REEVES
-ORIGINAL: FEB 29, 2016
+EMILY LYNCH
 MODIFIED: FEB 6, 2018
 ********************************/
 
 *START A LOG FILE
-log using "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Sessions\Session9\sess9_020618.smcl"
+log using "Z:\Emily's Docs\Courses\Pubhlth 490kr\Sessions\Session9\sess9_020618.smcl"
 
-use "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess9.dta"
+use "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess9.dta"
 
 *1. LABEL EACH VARIABLE AND VALUES
 *easy to use variables manager and then paste code below
