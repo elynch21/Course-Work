@@ -1,4 +1,4 @@
-- Undergraduate Course Work from Pubic Health 490KR Epidemiologic Data Management & Analysis, Taught by Professor Katherine W. Reeves, PhD, MPH
+- Undergraduate Course Work from Public Health 490KR Epidemiologic Data Management & Analysis, Taught by Professor Katherine W. Reeves, PhD, MPH
 - Course taken Spring Semester 2018
 
 - Students will develop fundamental skills in epidemiologic research, including data management, data analysis, and interpretation of results 
