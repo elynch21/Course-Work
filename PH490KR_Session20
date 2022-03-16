@@ -1,0 +1,96 @@
+/*****************************************
+THIS PROGRAM RUNS STEPS NEEDED
+FOR COMPLETION OF SESSIONS 20
+PH490KR, SPRING 2018
+
+Emily Lynch
+April 12, 2018
+*****************************************/;
+
+libname ph490kr "C:\Users\emilylynch\Desktop\ph490kr";
+libname fmt "C:\Users\emilylynch\Desktop\ph490kr";
+options fmtsearch=(fmt);
+
+data sess20;
+set ph490kr.vitdsess20;
+run;
+
+proc contents;run;
+
+*1. RR for alcohol and PMS;
+/*note: first we need to sort the data so that we are calculating the appropriate relative risk*/
+proc sort data=temp;
+by descending alc01 descending pmscc;
+run;
+proc freq data=temp order=data;
+tables alc01*pmscc/measures;
+run;
+/*RR=3.8*/
+
+*2. OR for smoking and PMS;
+proc sort data=temp;
+by descending smoke01 descending pmscc;
+run;
+proc freq data=temp order=data;
+tables smoke01*pmscc/ measures;
+run;
+/*OR=5.35*/
+
+*3. OR for smoke and PMS adjusted for sitting;
+proc sort data=temp;
+by descending smoke01 descending sitq descending pmscc;
+run;
+proc freq data=temp order=data;
+*syntax is adjustment*exposure*outcome, also use option "measures";
+tables sitq*smoke01*pmscc/cmh measures;
+run;
+/*stratum-specific ORs--T3: 3.88, T2: 12.67, T1: 4.67; adjusted 5.87
+from above, unadjusted OR=5.35, so no evidence that sitting is a confounder*/
+
+/*let's see how to do this in logistic regression, which allows us to easily control for
+multiple variables and get adjusted odds ratios*/
+
+*unadjusted;
+proc logistic data=temp order=data;
+model pmscc(event='1_case') =smoke01;
+run;
+*adjusted for for sitting;
+proc logistic data=temp order=data;
+model pmscc (event='1_case')=smoke01 sitq;
+run;
+
+*4. OR for weight and PMS;
+proc sort data=temp;
+by descending wt_med descending pmscc;
+run;
+proc freq data=temp order=data;
+tables wt_med*pmscc/measures;
+run;
+/*OR=0.94*/
+
+*5. OR for weight and PMS adjusted for smoking;
+proc sort data=temp;
+by descending wt_med descending smoke01 descending pmscc;
+run;
+proc freq data=temp order=data;
+tables smoke01*wt_med*pmscc/cmh measures;
+run;
+/*unadjusted OR=0.94, adjusted OR=1.07, CIs overlap--no evidence that smoking is a confounder*/
+
+*6. OR for tertile of sitting and PMS;
+/*proc freq doesn't give ORs for exposure with >2 levels, 
+so we will subset the data to get the 2 separate ORs we want*/
+proc sort data=temp;
+by descending sitq descending pmscc;
+run;
+proc freq data=temp order=data;
+where sitq ne 3;/*OR for T2 vs T1*/
+tables sitq*pmscc/measures ;
+run; 
+proc freq data=temp order=data;
+where sitq ne 2;/*OR for T3 vs T1*/
+tables sitq*pmscc/measures ;
+run;
+/*OR for T3 v T1 0.625, T2 v T1 0.81*/
+
+*non significant reduced risk with sitting;
