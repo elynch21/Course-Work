@@ -1,0 +1,197 @@
+/**********************************
+THIS PROGRAM PERFORMS ACTIVITIES FOR
+SESSION 17, PH490KR SPRING 2018
+
+EMILY LYNCH
+Modified: March 29, 2018
+*******************************/
+
+*Start by assigning libname to folder where dataset; 
+libname ph490kr "C:\Users\emilylynch\Desktop\ph490kr";
+
+data sess17; /*read in data into a temporary dataset that is stored in work and called sess17*/
+set ph490kr.vitdsess17; /*this is the dataset being read in*/
+run;
+*read in dataset to a temporary dataset;
+data sess17;
+set ph490kr.VitDsess17;
+run;
+
+*1a. check age_cig;
+proc means data=sess17;
+var age_cig;
+run;
+
+proc freq data=sess17;
+table age_cig*ev_smk;
+run;
+
+*fix by setting 99 to missing;
+data sess17;
+set sess17;/*note: this code will overwrite our temporary dataset*/
+age_cigkr=age_cig;
+if age_cig=99 then age_cigkr=.;
+if age_cig=0 then age_cigkr=.;
+run;
+
+*check our work;
+proc means data=sess17;
+var age_cigkr;
+run;
+
+proc print data=sess17 (obs=50);
+var age_cig age_cigkr;
+run;
+
+*1.b. check age_qt;
+proc means data=sess17;
+var age_qt;
+run;
+
+proc freq data=sess17;
+table age_qt*cur_smk;
+run;
+
+*set values of 99 to missing;
+data sess17;
+set sess17;
+
+age_qtkr=age_qt;
+if age_qt=99 then age_qtkr=.;
+run;
+
+*check work;
+proc means data=sess17;
+var age_qtkr;
+run;
+
+proc print data=sess17 (obs=50);
+var age_qt age_qtkr;
+run;
+
+*1c.check cig_day;
+proc freq data=sess17;
+table cig_day*cur_smk/missing;
+run;
+
+*set 99 to "0" for those who answer "no" to current smoking;
+data sess17;
+set sess17;
+
+cig_daykr=cig_day;
+if cig_day = 99 and (cur_smk eq 0) then cig_daykr=0;
+if cig_day = 99 and ((cur_smk eq .) or (cur_smk eq 1)) then cig_daykr=.;
+run;
+
+*check work;
+proc freq data=sess17;
+table cig_day*cig_daykr cig_daykr*cur_smk cig_daykr/missing;
+run;
+
+proc freq data=ph490kr.vitdsmk;
+table cig_day;
+run;
+
+*1d. check yrs_oc;
+
+proc means data=sess17;
+var yrs_oc;
+run;
+proc freq data=sess17;
+table yrs_oc*ever_oc/missing;
+run;
+
+*need to set 99 to "0" for those who answer "no" to ever OC use;
+/*also, many said no to ever_oc but then provided a number of years of OC use--how to handle?
+1. could set to "0," essentially applying skip pattern (if they had skipped the question as
+they were supposed to, they would have been set to 0)
+2. set to missing, since answers are inconsistent
+3. keep answers and set ever_oc to yes since they are indicating having used OCs
+
+Any of these options are ok, as long as you are consistent, document, and have a good rationale.
+Let's go with option #1*/
+
+
+data sess17;
+set sess17;
+
+yrs_ockr=yrs_oc;
+
+if yrs_oc=99 & ever_oc=0 then yrs_ockr=0;
+if yrs_oc=99 & ever_oc ^=0 then yrs_ockr=.;
+run;
+
+*check our work;
+
+proc print data=sess17;
+var yrs_ockr;
+where ever_oc=0;
+run;
+
+proc print data=sess17;
+var yrs_ockr ever_oc;
+where ever_oc ^=0;
+run;
+
+*1.e. check curr_oc;
+proc freq data=sess17;
+table curr_oc*ever_oc/missing;
+run;
+
+/*have 14 who answered yes to current but no to ever; 
+we will set to no to be consistent with our decision of how to handle yrs_oc above
+also have values of 99 that need to be set to no
+and some values of 99 when ever_oc=1 or missing that need to be set to missing*/
+
+data sess17;
+set sess17;
+
+curr_ockr=curr_oc;
+if curr_oc=1 & ever_oc=0 then curr_ockr=0;
+if curr_oc=99 & ever_oc=0 then curr_ockr=0;
+if curr_oc=99 & ever_oc^=0 then curr_ockr=.;
+run;
+
+*check our work;
+proc freq data=sess17;
+table curr_ockr*ever_oc/missing;
+run;
+
+*2. label each variable and its values;
+proc format library=ph490kr;
+value ynf 0 ="0_no" 1= "1_yes";
+value cig_dayf 1= "1_1-10" 2= "2_11-20" 3= "3_21-30" 4= "4_31-40" 5= "5_41+";
+run;
+
+options fmtsearch=(ph490kr);
+
+data sess17;
+set sess17;
+
+format ev_smk cur_smk ever_oc curr_ockr ynf.;
+
+label ev_smk="ev_smk: ever smoked 20+ packs cig";
+label cur_smk="cur_smk:currently smoke cig";
+label cig_daykr="cig_daykr:cigarettes per day";
+label age_cigkr="age_cigkr:age started smoking";
+label age_qtkr="age_qtkr:age quit smoking";
+label ever_oc="ever_oc:ever used OCs";
+label yrs_ockr="yrs_ockr:total years of OCuse";
+label curr_ockr="curr_ockr:current OC use";
+run;
+
+proc contents data=sess17;
+run;
+
+*let's clean up our dataset by dropping the variables we recoded;
+
+drop cig_day age_cig age_qt yrs_oc curr_oc;
+
+run;
+
+*3. save a permanent copyl;
+data ph490kr.VitDsess17_working;
+set sess17;
+run;
+proc contents data=ph490kr.VitDsess17_working;
+run;
