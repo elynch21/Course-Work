@@ -2,16 +2,16 @@
 THIS PROGRAM RUNS STEPS TO COMPLETE
 PH490KR, SESSION 6, SPRING 2018
 
-KATHERINE REEVES
+EMILY LYNCH
 ORIGINAL: FEB 1, 2018
 MODIFIED: FEB 7, 2018
 ***********************************/
 
 *1.START LOG
-log using "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Spring 2018\Sessions\Session6_Errors\ph490kr_sess6_020118.smcl"
+log using "Z:\Emily's Docs\Courses\Pubhlth 490kr\Spring 2018\Sessions\Session6_Errors\ph490kr_sess6_020118.smcl"
 
 *2.OPEN DATASET, USE THE VERSION WE SAVED AFTER LABELING IN SESSION 5 (OR OPEN ORIGINAL DATASET AND RUN YOUR DO FILE FROM SESSION 5 TO LABEL
-use "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsmk_working.dta"
+use "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsmk_working.dta"
 
 *3.CROSS-TAB OF EV_SMK AND CUR_SMK
 tab ev_smk cur_smk, miss
@@ -75,4 +75,4 @@ sum cig_daykr
 
 
 *7. SAVE DATASET, OK TO REPLACE OUR WORKING COPY
-save "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsmk_working.dta", replace
+save "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsmk_working.dta", replace
