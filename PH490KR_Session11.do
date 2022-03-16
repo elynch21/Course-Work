@@ -1,15 +1,15 @@
 /*************************************
-This program runs session
-11, ph490kr spring 2018
+This program runs session 11, 
+ph490kr spring 2018
 
 Calculating OR/RR in Stata
 
 Emily Lynch
-february 8, 2018
+February 8, 2018
 *************************************/
 
 *open dataset
-use "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess11.dta", clear
+use "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess11.dta", clear
 
 *FIND OR/RR FROM DROP-DOWNS: Statistics-->Tables for Epidemiologists  then select COhort study risk ratio or Case control odds ratio
 
