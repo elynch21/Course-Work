@@ -2,13 +2,13 @@
 THIS PROGRAM RUNS STEPS TO COMPLETE
 PH490KR, SESSION 5, SPRING 2018
 
-KATHERINE REEVES
-ORIGINAL: FEB 9, 2016
-MODIFIED: FEB 6, 2018
+EMILY LYNCH
+ORIGINAL: FEB 5, 2018
+MODIFIED: FEB 9, 2018
 ***********************************/
 
 *5.OPEN DATASET
-cd "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets"
+cd "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets"
 
 use VitDsmk.dta
 *6.VIEW DATASET AND CONTENTS
