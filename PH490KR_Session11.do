@@ -9,7 +9,7 @@ February 8, 2018
 *************************************/
 
 *open dataset
-use "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess11.dta", clear
+use "C:\Users\emilylynch\Downloads\VitDsess11.dta", clear
 
 *FIND OR/RR FROM DROP-DOWNS: Statistics-->Tables for Epidemiologists  then select COhort study risk ratio or Case control odds ratio
 
