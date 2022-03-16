@@ -1,0 +1,81 @@
+/*********************************
+This program runs class
+activity for session 15
+
+Emily Lynch
+March 22, 2018
+**********************************/
+
+
+*1. Use a lib name statement;
+libname ph490kr "C:\Users\emilylynch\Desktop\ph490kr";
+
+
+/*2. assign labels to each variable*/
+
+*first, I will read the data into a temporary dataset, then I'll start adding labels within the same data step;
+
+data sess15;
+set ph490kr.VitDsess14; 
+
+label ev_smk="ev_smk:ever smoked 20+ packs cigarettes"
+	cur_smk="cur_smk:currently smoke"
+	brand="brand:cigarette brand"
+	cig_day="cig_day:cigarettes per day smoked"
+	age_cig="age_cig:age started smoking"
+	age_qt="age_qt:age quit smoking";
+run;
+
+/*3. write formats for the categorical variables and assign them. This takes two separate steps:
+1--proc format to define the labels
+2--assign the format within a data step
+*/
+proc format library=ph490kr;
+value ynf 0="0_No" 1="1_Yes";
+value cigdayf 1="1_1-10" 2="2_11-20" 3="3_21-30" 4="4_31-40" 5="5_41+" 99="99_missing";
+run;
+
+options fmtsearch=(ph490kr);
+data sess15;
+set sess15; /*note that I am overwriting my existing temporary dataset*/
+
+format ev_smk ynf. cur_smk ynf. cig_day cigdayf.;
+run; 
+
+/*4. save as a permanent dataset and describe contents*/
+data ph490kr.VitDSess14_ecl;
+set sess15;
+run;
+
+proc contents data=ph490kr.VitDSess14_ecl;
+run;
+
+
+/***HERE IS HOW WE COULD INCORPORATE EVERYTHING WE'VE DONE INTO A SINGLE PROC FORMAT AND DATA STEP***/
+proc format library=ph490kr;
+value ynf= 0 "0_No" 1="1_Yes";
+value cigdayf 1="1_1-10" 2="2_11-20" 3="3_21-30" 4="4_31-40" 5="5_41+" 99="99_missing";
+value smokef 0="0_never smoker" 1="1_past smoker" 2="2_current smoker";
+run;
+
+options fmtsearch=(ph490kr);
+
+data ph490kr.VitDSess14_ecl;/*note that this will save a permanent SAS dataset in my folder*/
+set PH490KR.VitDSess14; 
+
+label ev_smk="ev_smk:ever smoked 20+ packs cigarettes"
+	cur_smk="cur_smk:currently smoke"
+	brand="brand:cigarette brand"
+	cig_day="cig_day:cigarettes per day smoked"
+	age_cig="age_cig:age started smoking"
+	age_qt="age_qt:age quit smoking";
+
+format ev_smk ynf. cur_smk ynf. cig_day cigdayf.;
+
+run;
+
+*could use ph490kr.vitdsess14_ecl or sess15 but best practice is to use ph490kr.vitdsess14_ecl;
+proc contents data=ph490kr.vitdsess14_ecl;
+run;
+
+
