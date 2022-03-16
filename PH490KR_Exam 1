@@ -60,9 +60,8 @@ tabulate cardio, summarize(bmi2)
 
 ttest bmi2, by(cardio)
 *similar to above, gives you the same numbers for mean and std dev, gives the CI's of No CD= 25.65-25.81 and Yes CD=26.38-26.76*
-*the p value comes out to 0.00 which is less than 0.05 and the CI's overlap with eachother therefore there is statistical significance*
+*the p value comes out to 0.00 which is less than 0.05 and the CI's do not overlap with eachother therefore there is statistical significance*
 
-NOTE THAT THE CIs DO NOT OVERLAP, WHICH IS EVIDENCE OF STATISTICAL SIGNIFICANCE (IF P<0.05 THEN THE 95% CIs WILL NOT OVERLAP)
 
 tabodds cardio bmi2
 *gives you p=0.0004 which is less then 0.05 therefore statistically significant*
