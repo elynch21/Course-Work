@@ -7,9 +7,10 @@ ORIGINAL: APRIL 29, 2018
 ********************************/
 
 *START A LOG FILE
-log using "/Users/Thao/Downloads/490KRST.smcl"
+log using "/Users/Emily/Downloads/490KRST.smcl"
 
-use "/Users/Thao/Downloads/490KRGROUPPROJ.dta""
+use "/Users/Emily/Downloads/490KRGROUPPROJ.dta""
+
 *1. LABEL EACH VARIABLE AND VALUES
 *easy to use variables manager and then paste code below
 
