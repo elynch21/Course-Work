@@ -1,5 +1,5 @@
 /*******************************************
-this program runs the activites for sess 19
+This program runs the activites for sess 19
 ph490kr spring 2018
 
 Emily Lynch
