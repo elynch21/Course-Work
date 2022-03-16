@@ -1,0 +1,674 @@
+/*******************************
+THIS PROGRAM PRODUCES KEY
+TO PH490KR GROUP PROJECT 
+
+
+ORIGINAL: APRIL 29, 2018
+********************************/
+
+START A LOG FILE
+log using "/Users/Emily/Downloads/490KRST.smcl"
+
+use "/Users/Emily/Downloads/490KRGROUPPROJ.dta""
+*1. LABEL EACH VARIABLE AND VALUES
+*easy to use variables manager an8d then paste code below
+
+drop Timestamp
+
+rename Age age
+rename Gender gender 
+rename EthnicityOriginorRace ethn_race
+rename EmploymentStatusAreyoucurre employ
+rename Doyouhaveanaccountonanyso socmed
+rename Doyouconsideryourselfanavid socmed_user
+rename Howoftendoyoucheckthefollo howoften_fb
+rename I howoften_tw
+rename J howoften_inst
+rename K howoften_link
+rename L howoften_snap
+rename M howoften_pin
+rename N howoften_vsco
+rename O howoften_red
+rename P howoften_tum
+rename Onaveragehowmanyhoursdoyou smpday
+rename Whatdoyounormallyusesocial sm_purp
+rename Doyouthinkthatsocialmediah smbimage
+rename Hassocialmediaevermadeyouw sm_app
+rename Doyouliketheideaoftanning tan_idea
+rename Haveyouevergoneordoyoucu tanever
+rename Notincludingsprayontansdur tan_year
+rename Doyouknowanyonewhohasgone tanfriend
+rename Howwouldyourateyourskintyp fitzskin
+rename Whichdoyouthinkismorelikel cancer_cause
+rename Wheredoyouprefertogoindoor indoor
+rename Doyouconsideryourselfmoreat att_tan
+rename Doyouthinkthattanningishar harm_tan
+rename Haveyoueverbeeneducatedabou ed_tan
+rename Doyoueverworryaboutgetting tan_can
+rename Doyouknowsomeonewhohasdied died_sc
+rename Doyoubelieveitwouldbehard stop_tan
+
+
+label variable age "age: Age"
+label variable gender "gender: Gender"
+label variable ethn_race "ethn_race: Ethnicity/ Origin (race)"
+label variable employ "employ: Employment status"
+label variable socmed "socmed: Has an account on any social media site"
+label variable socmed_user "socmed_user: Do you consider yourself an avid social media user?"
+label variable howoften_fb "howoften_fb: How often do you use Facebook?"
+label variable howoften_tw "howoften_tw: How often do you use Twitter?"
+label variable howoften_inst "howoften_insta: How often do you use Instagram?"
+label variable howoften_link "howoften_link: How often do you use LinkedIn?"
+label variable howoften_snap "howoften_snap: How often do you use Snapchat?"
+label variable howoften_pin "howoften_pin: How often do you use Pinterest?"
+label variable howoften_vsco "howoften_vsco: How often do you use VSCO?"
+label variable howoften_red "howoften_red: How often do you use Reddit?"
+label variable howoften_tum "howoften_tum: How often do you use Tumblr?"
+label variable smpday "smpday: How often do you use social media per day?"
+label variable sm_purp "sm_purp: Purpose of social media"
+label variable smbimage "smbimage: Effect of social media on body image "
+label variable sm_app "sm_app: Does social media make you want to change your appearance?"
+label variable tan_idea "tan_idea: Do you like the idea of tanning?"
+label variable tanever "tanever: Have you ever gone, or do you currently, go tanning?"
+label variable tan_year "tan_year: Not including spray-on tans, during the past 12 months, how many times have you used an indoor tanning device such as a sunlamp, tanning bed, or booth?"
+label variable tanfriend "tanfriend: Do you know anyone who has gone indoor tanning in the past 12 months?"
+label variable fitzskin "fitzskin: How would you rate your skin type on the Fitzpatrick Skin Type Scale"
+label variable cancer_cause "cancer_cause: Which do you think is more likely to cause skin cancer?"
+label variable indoor "indoor: Where do you prefer to go indoor tanning?"
+label variable att_tan "att_tan: Do you consider yourself more attractive when you are tan?"
+label variable harm_tan "harm_tan: Do you think that tanning is harmful?"
+label variable ed_tan "ed_tan: Have you ever been educated about tanning beds? (In school, watching a commercial, hearing a speaker, reading about it online, etc )"
+label variable tan_can "tan_can: Do you ever worry about getting skin cancer?"
+label variable died_sc "died_sc: Do you know someone who has died from skin cancer?"
+label variable stop_tan "stop_tan: Do you believe it would be hard for you to stop tanning? (Indoors or outdoors) "
+
+
+
+
+label define genderf 1 "1_Female" 2 "2_Male" 3 "3_Prefer not to answer"
+label define racef 1 "1_White" 2 "2_Hispanic or Latino" 3 "3_Black or African American" 4 "4_Native American or Native Indian" 5 "5_Asian/Pacific Islander" 6 "6_Other"
+label define workf 1 "1_Working part time" 2 "2_Working full time" 3 "3_Student(full or part time)" 4 "4_Not working"
+label define ynf 0 "0_Yes" 1 "1_No" 
+label define usef 1 "1_Mutiple Times per day" 2 "2_Daily" 3 "3_Multiple Times per Week" 4 "4_Weekly" 5 "5_Bi-Weekly" 6 "6_Monthly" 7 "7_Never/Don’t have an account"
+label define hourf  1 "0_ 0 hours" 2 "2_1-2 hours" 3 "3_3-4 hours" 4 "4_3-5+ hours"
+label define purposef 1 "1_Stay in touch with family/friends" 2 "2_Stay up-to-date on current events/news" 3 "3_Share photos/videos with friends" 4 "4_ Fill spare time" 5 "5_Find entertaining content" 6 "6_General networking/making friends/meet new people" 7 "7_Create new posts/share opinion" 8 "8_Other"
+label define viewf 1 "1_Negative" 2 "2_Positive" 3 "3_Indifferent" 
+label define ynf1 0 "0_Yes" 1 "1_No" 2 "2_Maybe" 
+label define ynf2 0 "0_Yes" 1 "1_No" 2 "2_Indifferent" 
+label define timesf 1 "1_more than once a week" 2 "2_weekly" 3 "3_bi-weekly(every two weeks)" 4 "4_monthly" 5 "5_bi-monthly(every two months) 6 "6_only once or twice" 
+7 "7_never" 
+label define ynf3 0 "0_Yes" 1 "1_No" 2 "2_Not sure" 
+label define ynf4 0 "0_Yes" 1 "1_No" 2 "2_Unsure " 
+label define scalef  1 "1_Type | - Ivory " 2 "2_Type || - Beige" 3 "3_Type ||| - Light Brown" 4 "4_Type |V - Medium Brown" 5 "5_Type V - Dark Brown" 6 "6_ Type V| - very Dark Brown"
+label define skinf 1 "1_The Sun" 2 "2_Tanning Beds" 3 "3_I think they both cause skin cancer" 4 "4_I don't think either cause skin cancer" 
+label define tanf 1 "1_Tanning Salon" 2 "2_Gym" 3 "3_Private bed/booth" 4 "4_I do not tan indoors, I outdoor tan" 5 "5_Other"
+label define harmf  1 "1_Never" 2 "2_Rarely" 3 "3_Sometimes" 4 "4_Most of the time" 5 "5_Always"
+label define cancerf 1 "1_Frequently" 2 "2_Sometimes" 3 "3_I try not to think about it" 4 "4_I don't think that I will get skin cancer" 5 "5_No opinion"
+
+
+label values gender genderf
+label values ethn_race racef 
+label values empoly workf
+label values socmed ynf 
+label values socmed_user ynf
+label values howoften_fb usef
+label values howoften_tw usef
+label values howoften_inst usef
+label values howoften_link usef
+label values howoften_snap usef
+label values howoften_pin usef
+label values howoften_vsco usef
+label values howoften_red usef
+label values howoften_tum usef
+Label define smpday hourf
+label values sm_purp purposef 
+label values smbimage viewf
+label values sm_app ynf1 
+label values tan_idea ynf2
+label values tanever ynf
+Label values tan_year timesf
+label values fitzskin scalef
+label values cancer_cause skinf
+label values indoor tanf
+label values att_tan ynf3 
+label values harm_tan harmf
+label values ed_tan ynf4
+label values tan_can cancerf
+label values died_sc ynf1
+label values stop_tan ynf1
+
+
+
+
+
+
+
+
+
+
+/*******************************
+THIS PROGRAM PRODUCES KEY
+TO PH490KR GROUP PROJECT 
+
+
+ORIGINAL: APRIL 29, 2018
+********************************/
+
+*START A LOG FILE
+log using "/Users/Thao/Downloads/490KRST.smcl"
+
+use "/Users/Thao/Downloads/490KRGROUPPROJ.dta""
+*1. LABEL EACH VARIABLE AND VALUES
+*easy to use variables manager and then paste code below
+
+drop Timestamp
+
+rename Age age
+rename Gender gender 
+rename EthnicityOriginorRace ethn_race
+rename EmploymentStatusAreyoucurre employ
+rename Doyouhaveanaccountonanyso socmed
+rename Doyouconsideryourselfanavid socmed_user
+rename Howoftendoyoucheckthefollo howoften_fb
+rename I howoften_tw
+rename J howoften_inst
+rename K howoften_link
+rename L howoften_snap
+rename M howoften_pin
+rename N howoften_vsco
+rename O howoften_red
+rename P howoften_tum
+rename Onaveragehowmanyhoursdoyou smpday
+rename Whatdoyounormallyusesocial sm_purp
+rename Doyouthinkthatsocialmediah smbimage
+rename Hassocialmediaevermadeyouw sm_app
+rename Doyouliketheideaoftanning tan_idea
+rename Haveyouevergoneordoyoucu tanever
+rename Notincludingsprayontansdur tan_year
+rename Doyouknowanyonewhohasgone tanfriend
+rename Howwouldyourateyourskintyp fitzskin
+rename Whichdoyouthinkismorelikel cancer_cause
+rename Wheredoyouprefertogoindoor indoor
+rename Doyouconsideryourselfmoreat att_tan
+rename Doyouthinkthattanningishar harm_tan
+rename Haveyoueverbeeneducatedabou ed_tan
+rename Doyoueverworryaboutgetting tan_can
+rename Doyouknowsomeonewhohasdied died_sc
+rename Doyoubelieveitwouldbehard stop_tan
+
+
+label variable age "age: Age"
+label variable gender "gender: Gender"
+label variable ethn_race "ethn_race: Ethnicity/ Origin (race)"
+label variable employ "employ: Employment status"
+label variable socmed "socmed: Has an account on any social media site"
+label variable socmed_user "socmed_user: Do you consider yourself an avid social media user?"
+label variable howoften_fb "howoften_fb: How often do you use Facebook?"
+label variable howoften_tw "howoften_tw: How often do you use Twitter?"
+label variable howoften_inst "howoften_insta: How often do you use Instagram?"
+label variable howoften_link "howoften_link: How often do you use LinkedIn?"
+label variable howoften_snap "howoften_snap: How often do you use Snapchat?"
+label variable howoften_pin "howoften_pin: How often do you use Pinterest?"
+label variable howoften_vsco "howoften_vsco: How often do you use VSCO?"
+label variable howoften_red "howoften_red: How often do you use Reddit?"
+label variable howoften_tum "howoften_tum: How often do you use Tumblr?"
+label variable smpday "smpday: How often do you use social media per day?"
+label variable sm_purp "sm_purp: Purpose of social media"
+label variable smbimage "smbimage: Effect of social media on body image "
+label variable sm_app "sm_app: Does social media make you want to change your appearance?"
+label variable tan_idea "tan_idea: Do you like the idea of tanning?"
+label variable tanever "tanever: Have you ever gone, or do you currently, go tanning?"
+label variable tan_year "tan_year: Not including spray-on tans, during the past 12 months, how many times have you used an indoor tanning device such as a sunlamp, tanning bed, or booth?"
+label variable tanfriend "tanfriend: Do you know anyone who has gone indoor tanning in the past 12 months?"
+label variable fitzskin "fitzskin: How would you rate your skin type on the Fitzpatrick Skin Type Scale"
+label variable cancer_cause "cancer_cause: Which do you think is more likely to cause skin cancer?"
+label variable indoor "indoor: Where do you prefer to go indoor tanning?"
+label variable att_tan "att_tan: Do you consider yourself more attractive when you are tan?"
+label variable harm_tan "harm_tan: Do you think that tanning is harmful?"
+label variable ed_tan "ed_tan: Have you ever been educated about tanning beds? (In school, watching a commercial, hearing a speaker, reading about it online, etc )"
+label variable tan_can "tan_can: Do you ever worry about getting skin cancer?"
+label variable died_sc "died_sc: Do you know someone who has died from skin cancer?"
+label variable stop_tan "stop_tan: Do you believe it would be hard for you to stop tanning? (Indoors or outdoors) "
+
+
+
+
+
+label define genderf 1 "1_Female" 2 "2_Male" 3 "3_Prefer not to answer"
+label define racef 1 "1_White" 2 "2_Hispanic or Latino" 3 "3_Black or African American" 4 "4_Native American or Native Indian" 5 "5_Asian/Pacific Islander" 6 "6_Other"
+label workf 1 "1_Working part time" 2 "2_Working full time" 3 "3_Student(full or part time)" 4 "4_Not working"
+label define ynf 0 "0_Yes" 1 "1_No" 
+label define usef 1 "1_Mutiple Times per day" 2 "2_Daily" 3 "3_Multiple Times per Week" 4 "4_Weekly" 5 "5_Bi-Weekly" 6 "6_Monthly" 7 "7_Never/Don’t have an account"
+label define hourf  1 "0_ 0 hours" 2 "2_1-2 hours" 3 "3_3-4 hours" 4 "4_3-5+ hours"
+label define purposef 1 "1_Stay in touch with family/friends" 2 "2_Stay up-to-date on current events/news" 3 "3_Share photos/videos with friends" 4 "4_ Fill spare time" 5 "5_Find entertaining content" 6 "6_General networking/making friends/meet new people" 7 "7_Create new posts/share opinion" 8 "8_Other"
+label viewf 1 "1_Negative" 2 "2_Positive" 3 "3_Indifferent" 
+label define ynf1 0 "0_Yes" 1 "1_No" 2 "2_Maybe" 
+label define ynf2 0 "0_Yes" 1 "1_No" 2 "2_Indifferent" 
+label define timesf 1 "1_more than once a week" 2 "2_weekly" 3 "2_bi-weekly(every two weeks)" 4 "4_monthly" 5 "5_bi-monthly(every two months) 6 "6_only once or twice" 
+7 "7_never" 
+label define ynf3 0 "0_Yes" 1 "1_No" 2 "2_Not sure" 
+label define ynf4 0 "0_Yes" 1 "1_No" 2 "2_Unsure " 
+label define scalef  1 "1_Type | - Ivory " 2 "2_Type || - Beige" 3 "3_Type ||| - Light Brown" 4 "4_Type |V - Medium Brown" 5 "5_Type V - Dark Brown" 6 "6_ Type V| - very Dark Brown"
+label define skinf 1 "1_The Sun" 2 "2_Tanning Beds" 3 "3_I think they both cause skin cancer" 4 "4_I don't think either cause skin cancer" 
+label define tanf 1 "1_Tanning Salon" 2 "2_Gym" 3 "3_Private bed/booth" 4 "4_I do not tan indoors, I outdoor tan" 5 "5_Other"
+label define harmf  1 "1_Never" 2 "2_Rarely" 3 "3_Sometimes" 4 "4_Most of the time" 5 "5_Always"
+label define cancerf 1 "1_Frequently" 2 "2_Sometimes" 3 "3_I try not to think about it" 4 "4_I don't think that I will get skin cancer" 5 "5_No opinion"
+
+
+
+label values gender genderf
+label values ethn_race racef 
+label values empoly workf
+label values socmed ynf 
+label values socmed_user ynf
+label values howoften_fb usef
+label values howoften_tw usef
+label values howoften_inst usef
+label values howoften_link usef
+label values howoften_snap usef
+label values howoften_pin usef
+label values howoften_vsco usef
+label values howoften_red usef
+label values howoften_tum usef
+label define smpday hourf
+label values sm_purp purposef 
+label values smbimage viewf
+label values sm_app ynf1 
+label values tan_idea ynf2
+label values tanever ynf
+label values tan_year timesf
+label values fitzskin scalef
+label values cancer_cause skinf
+label values indoor tanf
+label values att_tan ynf3 
+label values harm_tan harmf
+label values ed_tan ynf4
+label values tan_can cancerf
+label values died_sc ynf1
+label values stop_tan ynf1
+
+
+/* This program edits and runs statistical analysis on Group 4's dataset
+for the PH490KR group project assignment.
+
+Original: April 29, 2018
+Modified: April 29, 3018 */
+
+*1. Import .csv file into Stata
+import delimited "/Users/allisonpelletier/Downloads/490 Group Project Tanning and Social Media - SURVEY.csv", delimiter(comma) 
+
+*2. encode string variables to associate them with a numeric value, so we can define their value labels
+encode gender, generate (genders)
+encode ethnicityoriginorrace, generate (ethn_race)
+encode employmentstatusareyoucurrentlyâ, generate (employ)
+encode doyouhaveanaccountonanysocialmed, generate (socmed)
+encode doyouconsideryourselfanavidsocia, generate (socmed_user)
+encode howoftendoyoucheckthefollowingso, generate (howoften_fb)
+encode v9, generate (howoften_tw)
+encode v10, generate (howoften_inst)
+encode v11, generate (howoften_link)
+encode v12, generate (howoften_snap)
+encode v13, generate (howoften_pin)
+encode v14, generate (howoften_vsco)
+encode v15, generate (howoften_red)
+encode v16, generate (howoften_tum)
+encode onaveragehowmanyhoursdoyouspendo, generate (smpday)
+encode whatdoyounormallyusesocialmediaf, generate (sm_purp)
+encode doyouthinkthatsocialmediahasaneg, generate (smbimage)
+encode hassocialmediaevermadeyouwanttoc, generate (sm_app)
+encode doyouliketheideaoftanning, generate (tan_idea)
+encode haveyouevergoneordoyoucurrentlyg, generate (tanever)
+encode notincludingsprayontansduringthe, generate (tan_year)
+encode doyouknowanyonewhohasgoneindoort, generate (tanfriend)
+encode howwouldyourateyourskintypeonthe, generate (fitzskin)
+encode whichdoyouthinkismorelikelytocau, generate (cancer_cause)
+encode wheredoyouprefertogoindoortannin, generate (indoor)
+encode doyouconsideryourselfmoreattract, generate (att_tan)
+encode doyouthinkthattanningisharmful, generate (harm_tan)
+encode haveyoueverbeeneducatedabouttann, generate (ed_tan)
+encode doyoueverworryaboutgettingskinca, generate (tan_can)
+encode doyouknowsomeonewhohasdiedfromsk, generate (died_sc)
+encode doyoubelieveitwouldbehardforyout, generate (stop_tan)
+
+*3. Drop unneccassary variables to clean up dataset
+drop timestamp gender ethnicityoriginorrace employmentstatusareyoucurrentlyâ doyouhaveanaccountonanysocialmed doyouconsideryourselfanavidsocia howoftendoyoucheckthefollowingso v9 v10 v11 v12 v13 v14 v15 v16 onaveragehowmanyhoursdoyouspendo whatdoyounormallyusesocialmediaf doyouthinkthatsocialmediahasaneg hassocialmediaevermadeyouwanttoc doyouliketheideaoftanning haveyouevergoneordoyoucurrentlyg notincludingsprayontansduringthe doyouknowanyonewhohasgoneindoort howwouldyourateyourskintypeonthe whichdoyouthinkismorelikelytocau wheredoyouprefertogoindoortannin doyouconsideryourselfmoreattract doyouthinkthattanningisharmful haveyoueverbeeneducatedabouttann doyoueverworryaboutgettingskinca doyouknowsomeonewhohasdiedfromsk doyoubelieveitwouldbehardforyout
+
+*4. Label new variables
+label variable age "age: Participant's age"
+label variable genders "genders: Participant's gender"
+label variable ethn_race "ethn_race: Ethnicity/ Origin (race)"
+label variable employ "employ: Employment status"
+label variable socmed "socmed: Has an account on any social media site"
+label variable socmed_user "socmed_user: Do you consider yourself an avid social media user?"
+label variable howoften_fb "howoften_fb: How often do you use Facebook?"
+label variable howoften_tw "howoften_tw: How often do you use Twitter?"
+label variable howoften_inst "howoften_insta: How often do you use Instagram?"
+label variable howoften_link "howoften_link: How often do you use LinkedIn?"
+label variable howoften_snap "howoften_snap: How often do you use Snapchat?"
+label variable howoften_pin "howoften_pin: How often do you use Pinterest?"
+label variable howoften_vsco "howoften_vsco: How often do you use VSCO?"
+label variable howoften_red "howoften_red: How often do you use Reddit?"
+label variable howoften_tum "howoften_tum: How often do you use Tumblr?"
+label variable smpday "smpday: How often do you use social media per day?"
+label variable sm_purp "sm_purp: Purpose of social media"
+label variable smbimage "smbimage: Effect of social media on body image "
+label variable sm_app "sm_app: Does social media make you want to change your appearance?"
+label variable tan_idea "tan_idea: Do you like the idea of tanning?"
+label variable tanever "tanever: Have you ever gone, or do you currently, go tanning?"
+label variable tan_year "tan_year: Not including spray-on tans, during the past 12 months, how many times have you used an indoor tanning device such as a sunlamp, tanning bed, or booth?"
+label variable tanfriend "tanfriend: Do you know anyone who has gone indoor tanning in the past 12 months?"
+label variable fitzskin "fitzskin: How would you rate your skin type on the Fitzpatrick Skin Type Scale"
+label variable cancer_cause "cancer_cause: Which do you think is more likely to cause skin cancer?"
+label variable indoor "indoor: Where do you prefer to go indoor tanning?"
+label variable att_tan "att_tan: Do you consider yourself more attractive when you are tan?"
+label variable harm_tan "harm_tan: Do you think that tanning is harmful?"
+label variable ed_tan "ed_tan: Have you ever been educated about tanning beds? (In school, watching a commercial, hearing a speaker, reading about it online, etc )"
+label variable tan_can "tan_can: Do you ever worry about getting skin cancer?"
+label variable died_sc "died_sc: Do you know someone who has died from skin cancer?"
+label variable stop_tan "stop_tan: Do you believe it would be hard for you to stop tanning? (Indoors or outdoors) "
+
+*4. Create value labels for the variables
+label define genderf 1 "1_Female" 2 "2_Male" 3 "3_Prefer not to answer"
+label define racef 1 "1_White" 2 "2_Hispanic or Latino" 3 "3_Black or African American" 4 "4_Native American or Native Indian" 5 "5_Asian/Pacific Islander" 6 "6_Other"
+label define workf 1 "1_Working part time" 2 "2_Working full time" 3 "3_Student(full or part time)" 4 "4_Not working"
+label define ynf 0 "0_Yes" 1 "1_No" 
+label define usef 1 "1_Mutiple Times per day" 2 "2_Daily" 3 "3_Multiple Times per Week" 4 "4_Weekly" 5 "5_Bi-Weekly" 6 "6_Monthly" 7 "7_Never/Don’t have an account"
+label define hourf  1 "0_ 0 hours" 2 "2_1-2 hours" 3 "3_3-4 hours" 4 "4_3-5+ hours"
+label define purposef 1 "1_Stay in touch with family/friends" 2 "2_Stay up-to-date on current events/news" 3 "3_Share photos/videos with friends" 4 "4_ Fill spare time" 5 "5_Find entertaining content" 6 "6_General networking/making friends/meet new people" 7 "7_Create new posts/share opinion" 8 "8_Other"
+label define viewf 1 "1_Negative" 2 "2_Positive" 3 "3_Indifferent" 
+label define ynf1 0 "0_Yes" 1 "1_No" 2 "2_Maybe" 
+label define ynf2 0 "0_Yes" 1 "1_No" 2 "2_Indifferent" 
+label define timesf 1 "1_more than once a week" 2 "2_weekly" 3 "2_bi-weekly(every two weeks)" 4 "4_monthly" 5 "5_bi-monthly(every two months)" 6 "6_only once or twice" 7 "7_never" 
+label define ynf3 0 "0_Yes" 1 "1_No" 2 "2_Not sure" 
+label define ynf4 0 "0_Yes" 1 "1_No" 2 "2_Unsure " 
+label define scalef  1 "1_Type | - Ivory " 2 "2_Type || - Beige" 3 "3_Type ||| - Light Brown" 4 "4_Type |V - Medium Brown" 5 "5_Type V - Dark Brown" 6 "6_ Type V| - very Dark Brown"
+label define skinf 1 "1_The Sun" 2 "2_Tanning Beds" 3 "3_I think they both cause skin cancer" 4 "4_I don't think either cause skin cancer" 
+label define tanf 1 "1_Tanning Salon" 2 "2_Gym" 3 "3_Private bed/booth" 4 "4_I do not tan indoors, I outdoor tan" 5 "5_Other"
+label define harmf  1 "1_Never" 2 "2_Rarely" 3 "3_Sometimes" 4 "4_Most of the time" 5 "5_Always"
+label define cancerf 1 "1_Frequently" 2 "2_Sometimes" 3 "3_I try not to think about it" 4 "4_I don't think that I will get skin cancer" 5 "5_No opinion"
+
+*5. Assign variables their appropriate value labels
+label values genders genderf
+label values ethn_race racef 
+label values employ workf
+label values socmed ynf 
+label values socmed_user ynf
+label values howoften_fb usef
+label values howoften_tw usef
+label values howoften_inst usef
+label values howoften_link usef
+label values howoften_snap usef
+label values howoften_pin usef
+label values howoften_vsco usef
+label values howoften_red usef
+label values howoften_tum usef
+label values smpday hourf
+label values sm_purp purposef 
+label values smbimage viewf
+label values sm_app ynf1 
+label values tan_idea ynf2
+label values tanever ynf
+label values tan_year timesf
+label values fitzskin scalef
+label values cancer_cause skinf
+label values indoor tanf
+label values att_tan ynf3 
+label values harm_tan harmf
+label values ed_tan ynf4
+label values tan_can cancerf
+label values died_sc ynf1
+label values stop_tan ynf1
+
+---------------------------
+
+/* This program edits and runs statistical analysis on Group 4's dataset
+for the PH490KR group project assignment.
+
+Original: April 29, 2018
+Modified: April 29, 3018 */
+
+*1. Import .csv file into Stata
+import delimited "/Users/allisonpelletier/Downloads/490 Group Project Tanning and Social Media - SURVEY.csv", delimiter(comma) 
+
+*2. encode string variables to associate them with a numeric value, so we can define their value labels
+encode gender, generate (genders)
+encode ethnicityoriginorrace, generate (ethn_race)
+encode employmentstatusareyoucurrentlyâ, generate (employ)
+encode doyouhaveanaccountonanysocialmed, generate (socmed)
+encode doyouconsideryourselfanavidsocia, generate (socmed_user)
+encode howoftendoyoucheckthefollowingso, generate (howoften_fb)
+encode v9, generate (howoften_tw)
+encode v10, generate (howoften_inst)
+encode v11, generate (howoften_link)
+encode v12, generate (howoften_snap)
+encode v13, generate (howoften_pin)
+encode v14, generate (howoften_vsco)
+encode v15, generate (howoften_red)
+encode v16, generate (howoften_tum)
+encode onaveragehowmanyhoursdoyouspendo, generate (smpday)
+encode whatdoyounormallyusesocialmedia, generate (sm_purp)
+encode doyouthinkthatsocialmediahasaneg, generate (smbimage)
+encode hassocialmediaevermadeyouwanttoc, generate (sm_app)
+encode doyouliketheideaoftanning, generate (tan_idea)
+encode haveyouevergoneordoyoucurrentlyg, generate (tanever)
+encode notincludingsprayontansduringthe, generate (tan_year)
+encode doyouknowanyonewhohasgoneindoort, generate (tanfriend)
+encode howwouldyourateyourskintypeonthe, generate (fitzskin)
+encode whichdoyouthinkismorelikelytocau, generate (cancer_cause)
+encode wheredoyouprefertogoindoortannin, generate (indoor)
+encode doyouconsideryourselfmoreattract, generate (att_tan)
+encode doyouthinkthattanningisharmful, generate (harm_tan)
+encode haveyoueverbeeneducatedabouttann, generate (ed_tan)
+encode doyoueverworryaboutgettingskinca, generate (tan_can)
+encode doyouknowsomeonewhohasdiedfromsk, generate (died_sc)
+encode doyoubelieveitwouldbehardforyout, generate (stop_tan)
+
+*3. Drop unneccassary variables to clean up dataset
+drop timestamp gender ethnicityoriginorrace employmentstatusareyoucurrentlyâ doyouhaveanaccountonanysocialmed doyouconsideryourselfanavidsocia howoftendoyoucheckthefollowingso v9 v10 v11 v12 v13 v14 v15 v16 onaveragehowmanyhoursdoyouspendo whatdoyounormallyusesocialmediaf doyouthinkthatsocialmediahasaneg hassocialmediaevermadeyouwanttoc doyouliketheideaoftanning haveyouevergoneordoyoucurrentlyg notincludingsprayontansduringthe doyouknowanyonewhohasgoneindoort howwouldyourateyourskintypeonthe whichdoyouthinkismorelikelytocau wheredoyouprefertogoindoortannin doyouconsideryourselfmoreattract doyouthinkthattanningisharmful haveyoueverbeeneducatedabouttann doyoueverworryaboutgettingskinca doyouknowsomeonewhohasdiedfromsk doyoubelieveitwouldbehardforyout
+
+*4. Label new variables
+label variable age "age: Participant's age"
+label variable genders "genders: Participant's gender"
+label variable ethn_race "ethn_race: Ethnicity/ Origin (race)"
+label variable employ "employ: Employment status"
+label variable socmed "socmed: Has an account on any social media site"
+label variable socmed_user "socmed_user: Do you consider yourself an avid social media user?"
+label variable howoften_fb "howoften_fb: How often do you use Facebook?"
+label variable howoften_tw "howoften_tw: How often do you use Twitter?"
+label variable howoften_inst "howoften_insta: How often do you use Instagram?"
+label variable howoften_link "howoften_link: How often do you use LinkedIn?"
+label variable howoften_snap "howoften_snap: How often do you use Snapchat?"
+label variable howoften_pin "howoften_pin: How often do you use Pinterest?"
+label variable howoften_vsco "howoften_vsco: How often do you use VSCO?"
+label variable howoften_red "howoften_red: How often do you use Reddit?"
+label variable howoften_tum "howoften_tum: How often do you use Tumblr?"
+label variable smpday "smpday: How often do you use social media per day?"
+label variable sm_purp "sm_purp: Purpose of social media"
+label variable smbimage "smbimage: Effect of social media on body image "
+label variable sm_app "sm_app: Does social media make you want to change your appearance?"
+label variable tan_idea "tan_idea: Do you like the idea of tanning?"
+label variable tanever "tanever: Have you ever gone, or do you currently, go tanning?"
+label variable tan_year "tan_year: Not including spray-on tans, during the past 12 months, how many times have you used an indoor tanning device such as a sunlamp, tanning bed, or booth?"
+label variable tanfriend "tanfriend: Do you know anyone who has gone indoor tanning in the past 12 months?"
+label variable fitzskin "fitzskin: How would you rate your skin type on the Fitzpatrick Skin Type Scale"
+label variable cancer_cause "cancer_cause: Which do you think is more likely to cause skin cancer?"
+label variable indoor "indoor: Where do you prefer to go indoor tanning?"
+label variable att_tan "att_tan: Do you consider yourself more attractive when you are tan?"
+label variable harm_tan "harm_tan: Do you think that tanning is harmful?"
+label variable ed_tan "ed_tan: Have you ever been educated about tanning beds? (In school, watching a commercial, hearing a speaker, reading about it online, etc )"
+label variable tan_can "tan_can: Do you ever worry about getting skin cancer?"
+label variable died_sc "died_sc: Do you know someone who has died from skin cancer?"
+label variable stop_tan "stop_tan: Do you believe it would be hard for you to stop tanning? (Indoors or outdoors) "
+
+*4. Create value labels for the variables
+label define genderf 1 "1_Female" 2 "2_Male" 3 "3_Prefer not to answer"
+label define racef 1 "1_White" 2 "2_Hispanic or Latino" 3 "3_Black or African American" 4 "4_Native American or Native Indian" 5 "5_Asian/Pacific Islander" 6 "6_Other"
+label define workf 1 "1_Working part time" 2 "2_Working full time" 3 "3_Student(full or part time)" 4 "4_Not working"
+label define ynf 0 "0_Yes" 1 "1_No" 
+label define usef 1 "1_Mutiple Times per day" 2 "2_Daily" 3 "3_Multiple Times per Week" 4 "4_Weekly" 5 "5_Bi-Weekly" 6 "6_Monthly" 7 "7_Never/Don’t have an account"
+label define hourf  1 "0_ 0 hours" 2 "2_1-2 hours" 3 "3_3-4 hours" 4 "4_3-5+ hours"
+label define purposef 1 "1_Stay in touch with family/friends" 2 "2_Stay up-to-date on current events/news" 3 "3_Share photos/videos with friends" 4 "4_ Fill spare time" 5 "5_Find entertaining content" 6 "6_General networking/making friends/meet new people" 7 "7_Create new posts/share opinion" 8 "8_Other"
+label define viewf 1 "1_Negative" 2 "2_Positive" 3 "3_Indifferent" 
+label define ynf1 0 "0_No" 1 "1_Yes" 2 "2_Maybe" 
+label define ynf2 0 "0_No" 1 "1_Yes" 2 "2_Indifferent" 
+label define timesf 1 "1_more than once a week" 2 "2_weekly" 3 "2_bi-weekly(every two weeks)" 4 "4_monthly" 5 "5_bi-monthly(every two months)" 6 "6_only once or twice" 7 "7_never" 
+label define ynf3 0 "0_No" 1 "1_Yes" 2 "2_Not sure" 
+label define ynf4 0 "0_No" 1 "1_Yes" 2 "2_Unsure " 
+label define scalef  1 "1_Type | - Ivory " 2 "2_Type || - Beige" 3 "3_Type ||| - Light Brown" 4 "4_Type |V - Medium Brown" 5 "5_Type V - Dark Brown" 6 "6_ Type V| - very Dark Brown"
+label define skinf 1 "1_The Sun" 2 "2_Tanning Beds" 3 "3_I think they both cause skin cancer" 4 "4_I don't think either cause skin cancer" 
+label define tanf 1 "1_Tanning Salon" 2 "2_Gym" 3 "3_Private bed/booth" 4 "4_I do not tan indoors, I outdoor tan" 5 "5_Other"
+label define harmf  1 "1_Never" 2 "2_Rarely" 3 "3_Sometimes" 4 "4_Most of the time" 5 "5_Always"
+label define cancerf 1 "1_Frequently" 2 "2_Sometimes" 3 "3_I try not to think about it" 4 "4_I don't think that I will get skin cancer" 5 "5_No opinion"
+
+*5. Assign variables their appropriate value labels
+label values genders genderf
+label values ethn_race racef 
+label values employ workf
+label values socmed ynf 
+label values socmed_user ynf
+label values howoften_fb usef
+label values howoften_tw usef
+label values howoften_inst usef
+label values howoften_link usef
+label values howoften_snap usef
+label values howoften_pin usef
+label values howoften_vsco usef
+label values howoften_red usef
+label values howoften_tum usef
+label values smpday hourf
+label values sm_purp purposef 
+label values smbimage viewf
+label values sm_app ynf1 
+label values tan_idea ynf2
+label values tanever ynf
+label values tan_year timesf
+label values fitzskin scalef
+label values cancer_cause skinf
+label values indoor tanf
+label values att_tan ynf3 
+label values harm_tan harmf
+label values ed_tan ynf4
+label values tan_can cancerf
+label values died_sc ynf1
+label values stop_tan ynf1
+
+/*Unable to code for sm_purp due to it being a string variable so manually had to go into the data editor and clean it by the following catergoies
+so anyone who did both were coded for both, those who only did one of the following were coded as either social or nonsocial meaning social media use.
+
+Stay in touch with family/friends - socail 
+Share photos/videos with friends - socail 
+General networking/making friends/meet new people -social 
+Create new posts/share opinion - socail 
+
+Stay up-to-date on current events/news - nonsocial 
+Fill spare time- nonsocial 
+Find entertaining content - nonsocial 
+
+examaple “Stay in touch with family/friends, Stay up-to-date on current events/news, Share photos/videos with friends, Fill spare time, Find entertaining content, Create new posts/share opinion”
+would be coded as both due to having said they stay in touch with family and friends and stay up to current events/news. 
+
+0: Both
+1: Social
+2: Non-social 
+
+
+*/
+
+replace sm_purp = "0: Both" in 1
+replace sm_purp = "2: Non-social" in 2
+replace sm_purp = "0: Both" in 3
+replace sm_purp = "0: Both" in 4
+replace sm_purp = "0: Both" in 5
+replace sm_purp = "0: Both" in 6
+replace sm_purp = "0: Both" in 7
+replace sm_purp = "0: Both" in 9
+replace sm_purp = "0: Both" in 8
+replace sm_purp = "0: Both" in 10
+replace sm_purp = "0: Both" in 11
+replace sm_purp = "0: Both" in 12
+replace sm_purp = "0: Both" in 13
+replace sm_purp = "0: Both" in 14
+replace sm_purp = "1: Social" in 15
+replace sm_purp = "0: Both" in 16
+replace sm_purp = "2: Non-social" in 17
+replace sm_purp = "0: Both" in 18
+replace sm_purp = "0: Both" in 19
+replace sm_purp = "0: Both" in 20
+replace sm_purp = "0: Both" in 21
+replace sm_purp = "0: Both" in 22
+replace sm_purp = "0: Both" in 23
+replace sm_purp = "0: Both" in 24
+replace sm_purp = "0: Both" in 25
+replace sm_purp = "0: Both" in 26
+replace sm_purp = "0: Both" in 27
+replace sm_purp = "0: Both" in 28
+replace sm_purp = "0: Both" in 29
+replace sm_purp = "0: Both" in 30
+replace sm_purp = "0: Both" in 31
+replace sm_purp = "0: Both" in 32
+replace sm_purp = "2: Non-social" in 33
+replace sm_purp = "0: Both" in 34
+replace sm_purp = "0: Both" in 35
+replace sm_purp = "0: Both" in 36
+replace sm_purp = "0: Both" in 37
+replace sm_purp = "0: Both" in 38
+replace sm_purp = "1: Social" in 40
+replace sm_purp = "0: Both" in 39
+replace sm_purp = "0: Both" in 41
+replace sm_purp = "0: Both" in 42
+replace sm_purp = "0: Both" in 43
+replace sm_purp = "0: Both" in 44
+replace sm_purp = "0: Both" in 45
+replace sm_purp = "0: Both" in 46
+replace sm_purp = "0: Both" in 47
+replace sm_purp = "0: Both" in 48
+replace sm_purp = "0: Both" in 49
+replace sm_purp = "0: Both" in 50
+replace sm_purp = "0: Both" in 51
+replace sm_purp = "0: Both" in 52
+replace sm_purp = "0: Both" in 53
+replace sm_purp = "0: Both" in 54
+replace sm_purp = "0: Both" in 55
+replace sm_purp = "0: Both" in 56
+replace sm_purp = "0: Both" in 57
+replace sm_purp = "0: Both" in 58
+replace sm_purp = "0: Both" in 59
+replace sm_purp = "0: Both" in 60
+replace sm_purp = "0: Both" in 61
+replace sm_purp = "0: Both" in 62
+replace sm_purp = "0: Both" in 63
+replace sm_purp = "0: Both" in 64
+replace sm_purp = "0: Both" in 65
+replace sm_purp = "0: Both" in 66
+replace sm_purp = "0: Both" in 67
+replace sm_purp = "0: Both" in 68
+replace sm_purp = "0: Both" in 69
+replace sm_purp = "0: Both" in 70
+replace sm_purp = "0: Both" in 72
+replace sm_purp = "0: Both" in 73
+replace sm_purp = "0: Both" in 74
+replace sm_purp = "0: Both" in 75
+replace sm_purp = "0: Both" in 76
+replace sm_purp = "0: Both" in 77
+replace sm_purp = "0: Both" in 78
+replace sm_purp = "0: Both" in 79
+replace sm_purp = "0: Both" in 71
+replace sm_purp = "0: Both" in 80
+replace sm_purp = "0: Both" in 81
+replace sm_purp = "0: Both" in 82
+replace sm_purp = "0: Both" in 83
+replace sm_purp = "0: Both" in 84
+replace sm_purp = "0: Both" in 85
+replace sm_purp = "0: Both" in 86
+replace sm_purp = "0: Both" in 87
+
+clonevar tan_yearkr=tan_year /*note: clonevar keeps formatting*/
+replace tan_yearkr=. if tan_year==5 & tanever==0
+sum tan_yearkr
+tab tanever tan_yearkr
+
+clonevar tanyear2=tan_yearkr
+recode tanyear2 3=1 4=1 5=1 6=0
+label define tanyear2 0 "0: never" 1 "1: at least once"
+label values tanyear2 tanyear2
+tab tanyear2
