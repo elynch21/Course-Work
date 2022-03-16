@@ -1,15 +1,14 @@
-/*******************************
-THIS PROGRAM RUNS
-PH490KR SESSION 9 ACTIVITY
+/******************************
+THIS PROGRAM RUNS STEPS NEEDED
+FOR COMPLETION OF SESSIONS 9
+PH490KR, SPRING 2018
 
-EMILY LYNCH
-MODIFIED: FEB 6, 2018
-********************************/
+Emily Lynch
+ORIGINAL: FEBRUARY 20, 2018
+MODIFIED: FEBRUARY 20, 2018
+******************************/
 
-*START A LOG FILE
-log using "Z:\Emily's Docs\Courses\Pubhlth 490kr\Sessions\Session9\sess9_020618.smcl"
-
-use "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess9.dta"
+use "C:\Users\emilylynch\Downloads\VitDsess9 (1).dta"
 
 *1. LABEL EACH VARIABLE AND VALUES
 *easy to use variables manager and then paste code below
