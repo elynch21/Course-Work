@@ -1,0 +1,97 @@
+/*******************************************
+THIS PROGRAM COMPLETES ACTIVITIES FOR
+SESSION 19, PH490KR, SPRING 2018
+
+EMILY LYNCH
+April 10, 2018
+*******************************************/;
+
+*Assign Libname;
+libname ph490kr "C:\Users\emilylynch\Desktop\ph490kr";
+
+*read in dataset to temp data set;
+data sess19;
+set ph490kr.vitdsess19;
+run;
+
+proc contents data=vitd;
+run;
+
+*2. calculate mean, etc for bmi;
+proc univariate data=vitd;
+var bmi;
+run;
+
+*2.A.repeat by smoking status;
+proc univariate data=vitd;
+class smoke01;
+var bmi;
+run;
+
+*or can use proc means;
+proc means data=vitd mean std p25 p50 p75;
+var bmi;
+run;
+
+proc means data=vitd mean std p25 p50 p75;
+class smoke01;
+var bmi;
+run; 
+
+*2.B. perform t test;
+proc ttest data=vitd;
+class smoke01;
+var bmi;
+run;
+
+*3. tabulate numbers of bmi categories;
+proc freq data=vitd;
+table bmi_cat;
+run;
+
+*3.A.B.distribution by smoking status with chi square test;
+proc freq data=vitd;
+table bmi_cat*smoke01/chisq;
+run;
+
+*4. calculate summary statistics for weight;
+proc means data=vitd mean std p25 p50 p75;
+var wt_lbs;
+run;
+
+*4.A. stratification on nsaid use;
+proc means data=vitd mean std p25 p50 p75;
+class nsaid;
+var wt_lbs;
+run;
+
+*4.B. perform t test;
+proc ttest data=vitd;
+class nsaid;
+var wt_lbs;
+run;
+
+*5. tabulate nsaid status;
+proc freq data=vitd;
+tables nsaid;
+run;
+
+*5.A.B. cross-tab with bmi category;
+proc freq data=vitd;
+tables bmi_cat*nsaid/chisq;
+run;
+
+*6. calculate mean BMI among highest tertile of height;
+proc means data=vitd;
+where ht_tert eq 3;
+var bmi;
+run;
+
+*8. among normal weight, t test sitting by smoking status;
+proc ttest data=vitd;
+where bmi_cat eq 2;
+class smoke01;
+var tot_sit;
+run;
+
+*fail to reject null, no association;
