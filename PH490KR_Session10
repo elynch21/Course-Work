@@ -5,13 +5,13 @@ PH490KR, SPRING 2018
 
 DESCRIPTIVE STATISTICS IN STATA
 
-KATHERINE REEVES
-ORIGINAL: FEBRUARY 22, 2016
-MODIFIED: FEBRUARY 8, 2018
+Emily Lynch
+ORIGINAL: FEBRUARY 9, 2018
+MODIFIED: FEBRUARY 12, 2018
 ******************************/
 
 *1. OPEN DATASET, START LOG FILE
-use "Z:\Katherine's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess10.dta", clear
+use "Z:\Emily's Docs\Courses\Pubhlth 490kr\Datasets\VitDsess10.dta", clear
 
 *2. SUMMARY STATISTICS FOR BMI, OVERALL AND BY SMOKING STATUS
 sum bmi, detail
